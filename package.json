@@ -8,11 +8,18 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "format": "prettier -w --plugin-search-dir=. ."
+    "format": "prettier -w --plugin-search-dir=. .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.astro": "prettier -w --plugin-search-dir=.",
+    "**/*": "prettier -w --ignore-unknown"
   },
   "devDependencies": {
     "astro": "^1.0.0-beta.66",
     "git-cz": "^4.9.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "prettier-plugin-astro": "^0.1.1"
   }
