@@ -1,7 +1,5 @@
 backend:
-  name: 'github'
-  repo: 'starunity/starunity-blog'
-  base_url: 'https://blog.starunity.dev'
+  name: 'git-gateway'
   branch: 'master'
 
 publish_mode: 'editorial_workflow'
