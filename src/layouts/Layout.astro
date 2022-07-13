@@ -13,9 +13,23 @@ const { title, lang } = Astro.props as Props
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/x-icon' href='/favicon.ico' />
+    <script src='https://identity.netlify.com/v1/netlify-identity-widget.js'>
+
+    </script>
     <title>{title}</title>
   </head>
   <body>
     <slot></slot>
+    <script lang='js'>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', user => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/'
+            })
+          }
+        })
+      }
+    </script>
   </body>
 </html>
