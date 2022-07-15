@@ -14,7 +14,10 @@ const { title, lang } = Astro.props as Props
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/x-icon' href='/favicon.ico' />
-    <script src='https://identity.netlify.com/v1/netlify-identity-widget.js'>
+    <script
+      is:inline
+      src='https://identity.netlify.com/v1/netlify-identity-widget.js'
+    >
 
     </script>
     <title>{title}</title>
