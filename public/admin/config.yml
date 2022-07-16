@@ -21,5 +21,17 @@ collections:
           default: '../../layouts/Layout.astro',
         }
       - { label: 'Title', name: 'title', widget: 'string' }
+      - {
+          lable: 'Language',
+          name: 'lang',
+          widget: 'select',
+          options: ['en', 'zh-CN'],
+          default: 'zh-CN',
+        }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+      - {
+          label: 'Latest Updates Date',
+          name: 'latest_update_date',
+          widget: 'datetime',
+        }
       - { label: 'Body', name: 'body', widget: 'markdown' }
