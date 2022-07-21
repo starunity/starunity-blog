@@ -3,12 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "commit": "git-cz",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "^1.0.0-beta.73"
+    "astro": "^1.0.0-beta.73",
+    "git-cz": "^4.9.0"
   }
 }

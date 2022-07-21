@@ -2,9 +2,11 @@ lockfileVersion: 5.4
 
 specifiers:
   astro: ^1.0.0-beta.73
+  git-cz: ^4.9.0
 
 devDependencies:
   astro: 1.0.0-beta.73
+  git-cz: 4.9.0
 
 packages:
 
@@ -1364,6 +1366,11 @@ packages:
     dependencies:
       call-bind: 1.0.2
       get-intrinsic: 1.1.2
+    dev: true
+
+  /git-cz/4.9.0:
+    resolution: {integrity: sha512-cSRL8IIOXU7UFLdbziCYqg8f8InwLwqHezkiRHNSph7oZqGv0togId1kMTfKil6gzK0VaSXeVBb4oDl0fQCHiw==}
+    hasBin: true
     dev: true
 
   /github-slugger/1.4.0:
