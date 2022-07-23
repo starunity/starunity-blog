@@ -1,0 +1,37 @@
+backend:
+  name: 'git-gateway'
+  branch: 'master'
+
+publish_mode: 'editorial_workflow'
+media_folder: 'public/images/uploads'
+public_folder: '/images/uploads'
+local_backend: true
+
+collections:
+  - name: 'blog'
+    label: 'StarUnity Blog'
+    folder: 'src/pages/posts'
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - {
+          label: 'Layout',
+          name: 'layout',
+          widget: 'hidden',
+          default: '../../layouts/PostsLayout.astro',
+        }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - {
+          lable: 'Language',
+          name: 'lang',
+          widget: 'select',
+          options: ['en', 'zh-CN'],
+          default: 'zh-CN',
+        }
+      - { label: 'Publish Date', name: 'pubDate', widget: 'datetime' }
+      - {
+          label: 'Latest Updates Date',
+          name: 'updatedDate',
+          widget: 'datetime',
+        }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
