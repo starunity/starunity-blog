@@ -1,0 +1,25 @@
+---
+import { ILinkList } from '../config'
+
+export type Props = { linkList: ILinkList }
+
+const { linkList } = Astro.props as Props
+const { name, url, linkItem } = linkList
+---
+
+<div>
+  {url ? (
+    <a class="link link-primary" href={url}>
+      {name}
+    </a>
+  ) : (
+    <span>{name}</span>
+  )}: [&nbsp;{linkItem.map((item, index) => (
+    <>
+      <a class="link link-primary" href={item.url}>
+        {item.text}
+      </a>
+      {index !== linkItem.length - 1 && <span>,&nbsp;</span>}
+    </>
+  ))}&nbsp;]
+</div>

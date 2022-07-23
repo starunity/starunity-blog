@@ -1,0 +1,18 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Header from '../components/Header.astro'
+import { NAVIGATOR } from '../config'
+
+export interface Props {}
+
+const { name } = NAVIGATOR
+---
+
+<BaseLayout title={name}>
+  <div class='container mx-auto md:w-4/6 lg:w-3/6'>
+    <Header />
+    <main>
+      <slot></slot>
+    </main>
+  </div>
+</BaseLayout>
