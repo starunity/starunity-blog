@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro'
 import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
 import { NAVIGATOR } from '../config'
 
 export interface Props {}
@@ -11,8 +12,9 @@ const { name } = NAVIGATOR
 <BaseLayout title={name}>
   <div class='container mx-auto md:w-4/6 lg:w-3/6'>
     <Header />
-    <main>
+    <main class='mb-4'>
       <slot></slot>
     </main>
+    <Footer />
   </div>
 </BaseLayout>

@@ -15,3 +15,5 @@ export const NAVIGATOR: ILinkList = {
     { text: 'GitHub', url: 'https://github.com/starunity' },
   ],
 }
+
+export const FIRST_PUBLICATION_YEAR = 2022

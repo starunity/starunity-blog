@@ -1,0 +1,13 @@
+---
+import { FIRST_PUBLICATION_YEAR } from '../config'
+
+const currentYear = new Date().getFullYear()
+---
+
+<footer>
+  <p>
+    Copyright © {FIRST_PUBLICATION_YEAR != currentYear &&
+      FIRST_PUBLICATION_YEAR + ' - '}
+    {currentYear} StarUnity
+  </p>
+</footer>
