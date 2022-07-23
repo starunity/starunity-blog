@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@astrojs/tailwind': ^0.2.4
+  '@tailwindcss/typography': ^0.5.4
   astro: ^1.0.0-beta.73
   daisyui: ^2.19.1
   git-cz: ^4.9.0
@@ -15,6 +16,7 @@ dependencies:
 
 devDependencies:
   '@astrojs/tailwind': 0.2.4
+  '@tailwindcss/typography': 0.5.4
   astro: 1.0.0-beta.73
   git-cz: 4.9.0
   husky: 8.0.1
@@ -471,6 +473,16 @@ packages:
     dependencies:
       '@proload/core': 0.3.2
       tsm: 2.2.2
+    dev: true
+
+  /@tailwindcss/typography/0.5.4:
+    resolution: {integrity: sha512-QEdg40EmGvE7kKoDei8zr5sf4D1pIayHj4R31bH3lX8x2BtTiR+jNejYPOkhbmy3DXgkMF9jC8xqNiGFAuL9Sg==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
     dev: true
 
   /@types/acorn/4.0.6:
@@ -2162,6 +2174,18 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
+    dev: true
+
+  /lodash.castarray/4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+    dev: true
+
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+    dev: true
+
+  /lodash.merge/4.6.2:
+    resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
   /log-symbols/5.1.0:
