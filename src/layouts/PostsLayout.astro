@@ -1,0 +1,29 @@
+---
+import DefaultLayout from './DefaultLayout.astro'
+
+interface Frontmatter {
+  title: string
+  lang: 'en' | 'zh-CN'
+  pubDate: string
+  updatedDate: string
+}
+const { content } = Astro.props as { content: Frontmatter }
+
+const date = new Date(content.pubDate)
+const latestUpdateDate = new Date(content.updatedDate)
+---
+
+<DefaultLayout title={content.title} lang={content.lang}>
+  <article class='prose lg:prose-xl mx-auto mt-4 px-4 sm:px-0'>
+    <h1>{content.title}</h1>
+    <div class='flex flex-wrap justify-between text-base'>
+      <i>
+        Updated on {date.toDateString()}
+      </i>
+      <i>
+        Published on {latestUpdateDate.toDateString()}
+      </i>
+    </div>
+    <slot></slot>
+  </article>
+</DefaultLayout>
