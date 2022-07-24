@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@astrojs/rss': ^0.2.2
   '@astrojs/sitemap': ^0.2.6
   '@astrojs/tailwind': ^0.2.4
   '@tailwindcss/typography': ^0.5.4
@@ -13,6 +14,7 @@ specifiers:
   prettier-plugin-astro: ^0.1.2
 
 devDependencies:
+  '@astrojs/rss': 0.2.2
   '@astrojs/sitemap': 0.2.6
   '@astrojs/tailwind': 0.2.4
   '@tailwindcss/typography': 0.5.4
@@ -102,6 +104,12 @@ packages:
   /@astrojs/prism/0.6.1:
     resolution: {integrity: sha512-/Hoppze9XPUfCIx44EUzKe3Tg7alr1MHl2++QJlDRQZfKfIvMBvf8mRMSPh7vzfayH6IlFaQUS/jMtGUWKt9wA==}
     engines: {node: ^14.18.0 || >=16.12.0}
+    dev: true
+
+  /@astrojs/rss/0.2.2:
+    resolution: {integrity: sha512-4LhCTFLGDB7mXjdnbzV+HOx5YTUL8V1ZjNdrQlPBdGXdTVDeNCBACpcL/emiZtDqako91JfxaSnNd9ePAwFzGA==}
+    dependencies:
+      fast-xml-parser: 4.0.9
     dev: true
 
   /@astrojs/sitemap/0.2.6:
@@ -1523,6 +1531,13 @@ packages:
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.5
+    dev: true
+
+  /fast-xml-parser/4.0.9:
+    resolution: {integrity: sha512-4G8EzDg2Nb1Qurs3f7BpFV4+jpMVsdgLVuG1Uv8O2OHJfVCg7gcA53obuKbmVqzd4Y7YXVBK05oJG7hzGIdyzg==}
+    hasBin: true
+    dependencies:
+      strnum: 1.0.5
     dev: true
 
   /fastparse/1.1.2:
@@ -3589,6 +3604,10 @@ packages:
   /strip-final-newline/3.0.0:
     resolution: {integrity: sha512-dOESqjYr96iWYylGObzd39EuNTa5VJxyvVAEm5Jnh7KGo75V43Hk1odPQkNDyXNmUR6k+gEiDVXnjB8HJ3crXw==}
     engines: {node: '>=12'}
+    dev: true
+
+  /strnum/1.0.5:
+    resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}
     dev: true
 
   /style-to-object/0.3.0:

@@ -16,6 +16,7 @@
     "**/*": "prettier -w --ignore-unknown"
   },
   "devDependencies": {
+    "@astrojs/rss": "^0.2.2",
     "@astrojs/sitemap": "^0.2.6",
     "@astrojs/tailwind": "^0.2.4",
     "@tailwindcss/typography": "^0.5.4",

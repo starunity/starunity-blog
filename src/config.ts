@@ -12,6 +12,7 @@ export const NAVIGATOR: ILinkList = {
   url: '/',
   linkItem: [
     { text: 'Posts', url: '/posts' },
+    { text: 'RSS', url: '/rss.xml' },
     { text: 'GitHub', url: 'https://github.com/starunity' },
   ],
 }
