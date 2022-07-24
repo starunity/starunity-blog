@@ -15,11 +15,15 @@ const { name } = NAVIGATOR
 ---
 
 <BaseLayout title={title || name} lang={lang}>
-  <div class="container mx-auto md:w-4/6 lg:w-3/6">
-    <Header />
+  <div class="mx-auto max-w-xl lg:max-w-3xl">
+    <div class="lg:ml-8">
+      <Header />
+    </div>
     <main class="mb-4">
       <slot />
     </main>
-    <Footer />
+    <div class="text-center">
+      <Footer />
+    </div>
   </div>
 </BaseLayout>
