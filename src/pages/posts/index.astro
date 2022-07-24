@@ -1,0 +1,29 @@
+---
+import DefaultLayout from '../../layouts/DefaultLayout.astro'
+
+interface Frontmatter {
+  layout: string
+  title: string
+  lang: 'en' | 'zh-CN'
+  pubDate: string
+  updatedDate: string
+}
+
+const posts = await Astro.glob<Frontmatter>('./**/*.md')
+---
+
+<DefaultLayout title='Posts'>
+  <ul class='text-2xl'>
+    {posts.map(post => {
+      const pubDate = new Date('2022-07-23T13:14:14.773Z').toDateString()
+      return (
+        <li>
+          {pubDate} -{' '}
+          <a href={post.url} class="link link-primary">
+            {post.frontmatter.title}
+          </a>
+        </li>
+      )
+    })}
+  </ul>
+</DefaultLayout>
