@@ -521,7 +521,7 @@ sudo systemctl enable --now snapper-cleanup.timer
 
 ### 开启 pacman 安装包自动打快照
 
-首先确保已经安装了[[ArchLinux 开发环境搭建#安装 yay |yay]] 
+首先确保已经安装了 yay
 
 安装 `snap-pac-grub`
 
