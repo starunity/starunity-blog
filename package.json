@@ -21,6 +21,7 @@
     "@astrojs/tailwind": "^0.2.4",
     "@tailwindcss/typography": "^0.5.4",
     "astro": "1.0.0-beta.73",
+    "astro-robots-txt": "^0.3.7",
     "daisyui": "^2.20.0",
     "git-cz": "^4.9.0",
     "husky": "^8.0.1",
