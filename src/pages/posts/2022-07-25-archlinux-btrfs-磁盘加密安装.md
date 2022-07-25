@@ -63,6 +63,12 @@ reflector -c China -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
 ```
 
+换源之后进行更新
+
+```shell
+pacman -Sy
+```
+
 ## 磁盘操作
 
 ### 查看磁盘
