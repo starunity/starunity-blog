@@ -9,6 +9,7 @@ specifiers:
   astro-imagetools: ^0.6.10
   astro-robots-txt: ^0.3.7
   daisyui: ^2.20.0
+  date-fns: ^2.29.1
   git-cz: ^4.9.0
   husky: ^8.0.1
   lint-staged: ^13.0.3
@@ -24,6 +25,7 @@ devDependencies:
   astro-imagetools: 0.6.10_astro@1.0.0-beta.73
   astro-robots-txt: 0.3.7
   daisyui: 2.20.0
+  date-fns: 2.29.1
   git-cz: 4.9.0
   husky: 8.0.1
   lint-staged: 13.0.3
@@ -1559,6 +1561,11 @@ packages:
   /data-uri-to-buffer/4.0.0:
     resolution: {integrity: sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==}
     engines: {node: '>= 12'}
+    dev: true
+
+  /date-fns/2.29.1:
+    resolution: {integrity: sha512-dlLD5rKaKxpFdnjrs+5azHDFOPEu4ANy/LTh04A1DTzMM7qoajmKCBc8pkKRFT41CNzw+4gQh79X5C+Jq27HAw==}
+    engines: {node: '>=0.11'}
     dev: true
 
   /debug/4.3.4:

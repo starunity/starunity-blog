@@ -1,4 +1,5 @@
 ---
+import showDate from '../../utils/showDate'
 import DefaultLayout from '../../layouts/DefaultLayout.astro'
 
 interface Frontmatter {
@@ -16,7 +17,7 @@ const postsReversed = posts.reverse()
 <DefaultLayout title="Posts">
   <ul class="text-2xl">
     {postsReversed.map(post => {
-      const pubDate = new Date('2022-07-23T13:14:14.773Z').toDateString()
+      const pubDate = showDate(post.frontmatter.pubDate)
       return (
         <li>
           {pubDate} -{' '}

@@ -24,6 +24,7 @@
     "astro-imagetools": "^0.6.10",
     "astro-robots-txt": "^0.3.7",
     "daisyui": "^2.20.0",
+    "date-fns": "^2.29.1",
     "git-cz": "^4.9.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",

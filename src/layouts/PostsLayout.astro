@@ -1,4 +1,5 @@
 ---
+import showDate from '../utils/showDate'
 import DefaultLayout from './DefaultLayout.astro'
 import Giscus from '../components/Giscus.astro'
 
@@ -9,9 +10,6 @@ interface Frontmatter {
   updatedDate: string
 }
 const { content } = Astro.props as { content: Frontmatter }
-
-const date = new Date(content.pubDate)
-const latestUpdateDate = new Date(content.updatedDate)
 ---
 
 <DefaultLayout title={content.title} lang={content.lang}>
@@ -19,10 +17,10 @@ const latestUpdateDate = new Date(content.updatedDate)
     <h1>{content.title}</h1>
     <div class="flex flex-wrap justify-between text-base">
       <i>
-        Updated on {date.toDateString()}
+        Updated on {showDate(content.pubDate)}
       </i>
       <i>
-        Published on {latestUpdateDate.toDateString()}
+        Published on {showDate(content.updatedDate)}
       </i>
     </div>
     <slot />
