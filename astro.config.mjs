@@ -10,5 +10,5 @@ export default defineConfig({
   experimental: {
     integrations: true,
   },
-  integrations: [tailwind(), sitemap(), robotsTxt(), compress()],
+  integrations: [tailwind(), sitemap(), robotsTxt(), compress({ css: false })],
 })
