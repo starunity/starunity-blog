@@ -34,4 +34,12 @@ collections:
           name: 'updatedDate',
           widget: 'datetime',
         }
+      - {
+          label: 'Tags',
+          name: 'tags',
+          widget: 'list',
+          summary: '{{fields.name}}',
+          field: { label: Name, name: name, widget: string },
+        }
+      - { label: 'Description', name: 'description', widget: 'text' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
