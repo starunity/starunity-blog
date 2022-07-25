@@ -2,8 +2,8 @@
 layout: ../../layouts/PostsLayout.astro
 title: ArchLinux Btrfs 磁盘加密安装
 lang: zh-CN
-pubDate: 2022-07-25T11:06:57.143Z
-updatedDate: 2022-07-25T11:06:57.157Z
+pubDate: 2022-07-25T11:45:16.013Z
+updatedDate: 2022-07-25T11:45:16.872Z
 tags:
   - ArchLinux
   - Btrfs
@@ -418,3 +418,125 @@ swapon /swap/swapfile
 /swap/swapfile         none         swap          sw          0 0
 ```
 
+![/etc/fstab截图](/images/uploads/pasted-image-20220511233702.png "/etc/fstab截图")
+
+使用 btrfs_map_physical 获取 btrfs swapfile 的偏移量
+
+下载 btrfs_map_physical.c
+
+```shell
+curl -O https://raw.githubusercontent.com/osandov/osandov-linux/master/scripts/btrfs_map_physical.c
+
+# China
+curl -O https://ghproxy.com/https://raw.githubusercontent.com/osandov/osandov-linux/master/scripts/btrfs_map_physical.c
+```
+
+编译
+
+```shell
+gcc btrfs_map_physical.c -o btrfs_map_physical
+```
+
+获取 swapfile offset
+
+```shell
+physical_offset=$(./btrfs_map_physical /swap/swapfile | awk '{ if ($1==0) print $NF; }')
+offset_pagesize=(`getconf PAGESIZE`)
+offset=$(( physical_offset / offset_pagesize ))
+echo $offset > offset.txt
+```
+
+编辑 `/etc/default/grub`
+
+```
+  GRUB_CMDLINE_LINUX_DEFAULT="root=/dev/mapper/archlinux resume_offset=2761984"
+```
+
+![/etc/default/grub截图](/images/uploads/pasted-image-20220512115505.png "/etc/default/grub截图")
+
+重新生成 `grub.cfg`
+
+```shell
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+### 退出 arch-chroot 取消挂载完成安装
+
+```shell
+exit
+umount -R /mnt
+cryptsetup close archlinux
+reboot
+```
+
+## 快照策略配置
+
+### 移除 /.snapshots 目录
+
+```shell
+sudo rm -r /.snapshots
+```
+
+### 创建 snapper 配置文件
+
+```shell
+sudo snapper -c root create-config /
+sudo snapper -c home create-config /home/
+```
+
+### 重新挂载
+
+```bash
+mount -a
+```
+
+### 更改 snapper 配置文件
+
+```shell
+sudo nvim /etc/snapper/configs/root
+sudo nvim /etc/snapper/configs/home
+```
+
+#### 设置允许访问的用户组
+
+![设置允许访问的用户组截图](/images/uploads/pasted-image-20220512135502.png "设置允许访问的用户组截图")
+
+#### 设置自动快照规则
+
+![设置自动快照规则截图](/images/uploads/pasted-image-20220512135738.png "设置自动快照规则截图")
+
+
+### 启用自动快照和自动快照清理
+
+```shell
+sudo systemctl enable --now snapper-timeline.timer
+sudo systemctl enable --now snapper-cleanup.timer
+```
+
+### 开启 pacman 安装包自动打快照
+
+首先确保已经安装了[[ArchLinux 开发环境搭建#安装 yay |yay]] 
+
+安装 `snap-pac-grub`
+
+```shell
+yay -S snap-pac-grub
+```
+
+
+### 安装 snapper-gui 工具 (可选)
+
+```
+yay -S snapper-gui 
+```
+
+## 参考
+
+1.  [Btrfs (简体中文) - ArchWiki](https://wiki.archlinux.org/title/Btrfs_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
+2. [Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file)
+3.  [从 Manjaro 迁移到 Arch Linux | weirane’s blog](https://blog.ruo-chen.wang/2021/03/switch-from-manjaro-to-arch.html)
+4.  [让系统更安全 - 系统分区加密 (Btrfs on LUKS) 操作实录 | ∩ω∩ Technology](https://nwn.moe/posts/btrfs-on-luks/)
+5.  [(3) Arch Linux Install: January 2021 ISO With BTRFS & Snapshots - YouTub](https://www.youtube.com/watch?v=Xynotc9BKe8)
+6.  [Deebble/arch-btrfs-install-guide: Arch Linux installation guide with btrfs and snapper](https://github.com/Deebble/arch-btrfs-install-guide)
+7. [arch btrfs with encryption](https://seankhliao.com/blog/12020-11-08-arch-dm-crypt-btrfs/)
+8. [swap - Can I have a swapfile on btrfs? - Ask Ubuntu](https://askubuntu.com/questions/1206157/can-i-have-a-swapfile-on-btrfs)
