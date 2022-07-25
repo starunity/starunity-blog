@@ -3,13 +3,22 @@ import showDate from '../utils/showDate'
 import DefaultLayout from './DefaultLayout.astro'
 import Giscus from '../components/Giscus.astro'
 
-interface Frontmatter {
+interface Content {
   title: string
   lang: 'en' | 'zh-CN'
   pubDate: string
   updatedDate: string
+  tags: string[]
+  description: string
+  astro: {
+    headers: { depth: number; slug: string; text: string }
+    source: string
+    html: string
+    url: string
+    file: string
+  }
 }
-const { content } = Astro.props as { content: Frontmatter }
+const { content } = Astro.props as { content: Content }
 ---
 
 <DefaultLayout title={content.title} lang={content.lang}>
