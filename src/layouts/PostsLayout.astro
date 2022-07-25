@@ -32,6 +32,16 @@ const { content } = Astro.props as { content: Content }
         Published on {showDate(content.updatedDate)}
       </i>
     </div>
+    <h2>Table Of Content</h2>
+    <ul>
+      {content.astro.headers.map(header => (
+        <li>
+          <a href={'#' + header.slug} class="link link-primary link-hover">
+            {header.text}
+          </a>
+        </li>
+      ))}
+    </ul>
     <slot />
     <Giscus dataLang={content.lang} />
   </article>
