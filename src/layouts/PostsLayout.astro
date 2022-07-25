@@ -1,5 +1,6 @@
 ---
 import DefaultLayout from './DefaultLayout.astro'
+import Giscus from '../components/Giscus.astro'
 
 interface Frontmatter {
   title: string
@@ -25,5 +26,6 @@ const latestUpdateDate = new Date(content.updatedDate)
       </i>
     </div>
     <slot />
+    <Giscus dataLang={content.lang} />
   </article>
 </DefaultLayout>
