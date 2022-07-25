@@ -10,11 +10,12 @@ interface Frontmatter {
 }
 
 const posts = await Astro.glob<Frontmatter>('./**/*.md')
+const postsReversed = posts.reverse()
 ---
 
 <DefaultLayout title="Posts">
   <ul class="text-2xl">
-    {posts.map(post => {
+    {postsReversed.map(post => {
       const pubDate = new Date('2022-07-23T13:14:14.773Z').toDateString()
       return (
         <li>
