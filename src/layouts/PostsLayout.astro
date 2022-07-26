@@ -22,7 +22,7 @@ const { content } = Astro.props as { content: Content }
 ---
 
 <DefaultLayout title={content.title} lang={content.lang}>
-  <article class="prose lg:prose-xl mx-auto mt-4 px-4 sm:px-0">
+  <article class="prose lg:prose-lg lg:max-w-3xl mx-auto mt-4">
     <h1>{content.title}</h1>
     <div class="flex flex-wrap justify-between text-base">
       <i>
