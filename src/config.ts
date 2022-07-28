@@ -7,8 +7,14 @@ export interface ILinkList {
   }[]
 }
 
+export const SITE = {
+  title: "StarUnity's Blog",
+  description: "StarUnity's Blog",
+  defaultLanguage: 'en',
+}
+
 export const NAVIGATOR: ILinkList = {
-  name: "StarUnity's Blog",
+  name: SITE.title,
   url: '/',
   linkItem: [
     { text: 'Posts', url: '/posts' },

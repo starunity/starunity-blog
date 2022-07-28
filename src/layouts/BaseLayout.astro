@@ -1,6 +1,7 @@
 ---
 import HeadCommon from '../components/HeadCommon.astro'
 import NetlifyIdentity from '../components/NetlifyIdentity.astro'
+import { SITE } from '../config'
 
 export interface Props {
   title: string
@@ -11,7 +12,7 @@ const { title, lang } = Astro.props as Props
 ---
 
 <!DOCTYPE html>
-<html lang={lang || 'en'} data-theme="night">
+<html lang={lang || SITE.defaultLanguage} data-theme="night">
   <head>
     <HeadCommon />
     <title>{title}</title>
