@@ -25,8 +25,8 @@ collections:
           lable: 'Language',
           name: 'lang',
           widget: 'select',
-          options: ['en', 'zh-CN'],
-          default: 'zh-CN',
+          options: ['en', 'zh-Hans'],
+          default: 'zh-Hans',
         }
       - { label: 'Publish Date', name: 'pubDate', widget: 'datetime' }
       - {

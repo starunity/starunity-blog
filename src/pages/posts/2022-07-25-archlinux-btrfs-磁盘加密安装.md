@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostsLayout.astro
 title: ArchLinux Btrfs 磁盘加密安装
-lang: zh-CN
+lang: zh-Hans
 pubDate: 2022-07-25T11:45:16.013Z
 updatedDate: 2022-07-25T11:45:16.872Z
 tags:
@@ -9,6 +9,7 @@ tags:
   - Btrfs
 description: ArchLinux Btrfs 磁盘加密安装配置流程
 ---
+
 ## 进行联网
 
 ### 有线
@@ -21,21 +22,21 @@ ip a
 
 ### 无线
 
-先使用 `iwctl` 查看是否有无线网卡
+先使用  `iwctl`  查看是否有无线网卡
 
 ```shell
 iwctl station list
 ```
 
-![iwctl检查不到网卡](/images/uploads/pasted-image-20220510195833.png "iwctl检查不到网卡")
+![iwctl检查不到网卡](/images/uploads/pasted-image-20220510195833.png 'iwctl检查不到网卡')
 
-如果没有找到可能是无线网卡被 `rfkill` 禁用了，通过以下命令解除禁用
+如果没有找到可能是无线网卡被  `rfkill`  禁用了，通过以下命令解除禁用
 
 ```shell
 rfkill unblock all
 ```
 
-解除禁用后使用 `iwctl` 连接网络
+解除禁用后使用  `iwctl`  连接网络
 
 ## 设置 NTP
 
@@ -57,7 +58,7 @@ reflector -c China -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 
 ### 手动更换中科大源
 
-编辑 `/etc/pacman.d/mirrorlist` ，在文件的最顶端添加
+编辑  `/etc/pacman.d/mirrorlist` ，在文件的最顶端添加
 
 ```
 Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
@@ -73,15 +74,15 @@ pacman -Sy
 
 ### 查看磁盘
 
-使用 `lsblk` 查看当前系统存在的磁盘
+使用  `lsblk`  查看当前系统存在的磁盘
 
 ```shell
-lsblk 
+lsblk
 ```
 
 ### 设置分区格式
 
-使用 `parted` 设置磁盘分区格式 (**注意: 更换分区格式磁盘数据会丢失**)
+使用  `parted`  设置磁盘分区格式 (**注意: 更换分区格式磁盘数据会丢失**)
 
 ```shell
 parted /dev/nvme0n1
@@ -97,7 +98,7 @@ New disk label type? gpt
 
 ### 分区
 
-通过 `cfdisk` 命令通过 TUI 对磁盘进行分区
+通过  `cfdisk`  命令通过 TUI 对磁盘进行分区
 
 ```shell
 cfdisk /dev/nvme0n1
@@ -108,60 +109,60 @@ cfdisk /dev/nvme0n1
 1. 512M EFI 分区 (不加密)
 2. 512M BOOT 分区 (不加密)
 3. ~~8G SWAP 交换分区 (加密) （内存小于 8G 交换分区和内存同大小，大于 8G 交换分区大小固定 8G)~~
-4. 剩下加入 root 分区，通过btrfs 卷来进行功能划分
+4. 剩下加入 root 分区，通过 btrfs 卷来进行功能划分
 
-![分区截图](/images/uploads/rmnrsjz7sr.png "分区截图")
+![分区截图](/images/uploads/rmnrsjz7sr.png '分区截图')
 
 ### 格式化非加密分区
 
-格式化 `efi`, `boot` 分区
+格式化  `efi`, `boot`  分区
 
 ```shell
 mkfs.vfat /dev/nvme0n1p1
 mkfs.ext4 /dev/nvme0n1p2
 ```
 
-### 选择加密算法格式化 root 分区
+### 选择加密算法格式化  root  分区
 
 #### 测试加密算法性能
 
-首先查看各种加密算法在当前CPU下的性能
+首先查看各种加密算法在当前 CPU 下的性能
 
 ```shell
 cryptsetup benchmark
 ```
 
-![benchmark结果截图](/images/uploads/pasted-image-20220510212431.png "benchmark结果截图")
+![benchmark结果截图](/images/uploads/pasted-image-20220510212431.png 'benchmark结果截图')
 
-综合加解密速度和安全性，我这里选择 `aes-xts` 密钥长度为 256b，因为 `cbc` 填充存在[填充攻击](https://www.packetmania.net/2020/12/01/AES-CBC-PaddingOracleAttack/)因此不建议选择
+综合加解密速度和安全性，我这里选择  `aes-xts`  密钥长度为 256b，因为  `cbc`  填充存在[填充攻击](https://www.packetmania.net/2020/12/01/AES-CBC-PaddingOracleAttack/)因此不建议选择
 
 #### 加密格式化分区
 
-因为默认使用的 `aes-xts-512` 加密，这里使用 `-s 256` 来指定使用 256b 密钥
+因为默认使用的  `aes-xts-512`  加密，这里使用  `-s 256`  来指定使用 256b 密钥
 
 ```shell
 cryptsetup luksFormat -s 256 /dev/nvme0n1p4
 ```
 
-输入全大写 `YES`，然后输入加密密码并验证密码，等待一会儿就完成了磁盘加密
+输入全大写  `YES`，然后输入加密密码并验证密码，等待一会儿就完成了磁盘加密
 
-![格式化分区截图](/images/uploads/pasted-image-20220510213907.png "格式化分区截图")
+![格式化分区截图](/images/uploads/pasted-image-20220510213907.png '格式化分区截图')
 
 #### 打开加密的分区
 
-使用 `cryptsetup open` 打开加密的分区，这里的 `archlinux` 是解密之后的磁盘映射名（可自定义）
+使用  `cryptsetup open`  打开加密的分区，这里的  `archlinux`  是解密之后的磁盘映射名（可自定义）
 
 ```shell
 cryptsetup open /dev/nvme0n1p4 archlinux
 ```
 
-输入正确的密码解密后就可以在 `/dev/mapper/` 目录下看到磁盘映射文件了，解密映射文件可以被格式化、挂载就像正常的块文件一样
+输入正确的密码解密后就可以在  `/dev/mapper/`  目录下看到磁盘映射文件了，解密映射文件可以被格式化、挂载就像正常的块文件一样
 
 ```shell
 ls /dev/mapper/
 ```
 
-![查看磁盘映射文件截图](/images/uploads/pasted-image-20220510214404.png "查看磁盘映射文件截图")
+![查看磁盘映射文件截图](/images/uploads/pasted-image-20220510214404.png '查看磁盘映射文件截图')
 
 #### 查看加密分区
 
@@ -169,7 +170,7 @@ ls /dev/mapper/
 cryptsetup status /dev/mapper/archlinux
 ```
 
-![加密分区信息截图](/images/uploads/pasted-image-20220510214631.png "加密分区信息截图")
+![加密分区信息截图](/images/uploads/pasted-image-20220510214631.png '加密分区信息截图')
 
 ## 配置 Btrfs 文件系统
 
@@ -213,9 +214,9 @@ mount /dev/nvme0n1p1 /mnt/efi
 mount /dev/nvme0n1p2 /mnt/boot
 ```
 
-`lsblk` 查看挂载结果
+`lsblk`  查看挂载结果
 
-![lsblk挂载结果](/images/uploads/pasted-image-20220511163003.png "lsblk挂载结果")
+![lsblk挂载结果](/images/uploads/pasted-image-20220511163003.png 'lsblk挂载结果')
 
 ### 对 /var/log/ 和 警用 CoW
 
@@ -259,7 +260,7 @@ arch-chroot /mnt
 
 ### 基础配置
 
-参考 [Installation guide - ArchWiki](https://wiki.archlinux.org/title/installation_guide)
+参考  [Installation guide - ArchWiki](https://wiki.archlinux.org/title/installation_guide)
 
 ```shell
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -304,7 +305,7 @@ pacman -S grub efibootmgr networkmanager git reflector snapper grub-btrfs base-d
 
 #### mkinitcpio.conf
 
-编辑 
+编辑
 
 ```shell
 nvim /etc/mkinitcpio.conf
@@ -342,7 +343,7 @@ nvim /etc/crypttab.initramfs
 :read !lsblk -o name,uuid
 ```
 
-![磁盘UUID截图](/images/uploads/pasted-image-20220511154203.png "磁盘UUID截图")
+![磁盘UUID截图](/images/uploads/pasted-image-20220511154203.png '磁盘UUID截图')
 
 然后填入以下内容并删除多余的内容
 
@@ -350,7 +351,7 @@ nvim /etc/crypttab.initramfs
 archlinux     UUID=<lsblk 显示的 root 分区磁盘的 UUID>    none
 ```
 
-![crypttab.initramfs文件截图](/images/uploads/pasted-image-20220511161121.png "crypttab.initramfs文件截图")
+![crypttab.initramfs文件截图](/images/uploads/pasted-image-20220511161121.png 'crypttab.initramfs文件截图')
 
 #### 生成启动镜像
 
@@ -374,7 +375,7 @@ nvim /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="root=/dev/mapper/archlinux"
 ```
 
-![内核参数截图](/images/uploads/pasted-image-20220511155312.png "内核参数截图")
+![内核参数截图](/images/uploads/pasted-image-20220511155312.png '内核参数截图')
 
 #### 生成 GRUB 配置文件
 
@@ -395,7 +396,7 @@ passwd star
 EDITOR=nvim visudo
 ```
 
-![visudo编辑截图](/images/uploads/pasted-image-20220511155820.png "visudo编辑截图")
+![visudo编辑截图](/images/uploads/pasted-image-20220511155820.png 'visudo编辑截图')
 
 更换新默认 `shell`
 
@@ -413,7 +414,7 @@ chmod 600 /swap/swapfile
 truncate -s 0 /swap/swapfile
 chattr +C /swap/swapfile
 btrfs property set /swap/swapfile compression none # 无法执行
-dd if=/dev/zero of=/swap/swapfile bs=1M count=16384 # 16G SWAP 
+dd if=/dev/zero of=/swap/swapfile bs=1M count=16384 # 16G SWAP
 mkswap /swap/swapfile
 swapon /swap/swapfile
 ```
@@ -424,7 +425,7 @@ swapon /swap/swapfile
 /swap/swapfile         none         swap          sw          0 0
 ```
 
-![/etc/fstab截图](/images/uploads/pasted-image-20220511233702.png "/etc/fstab截图")
+![/etc/fstab截图](/images/uploads/pasted-image-20220511233702.png '/etc/fstab截图')
 
 使用 btrfs_map_physical 获取 btrfs swapfile 的偏移量
 
@@ -458,7 +459,7 @@ echo $offset > offset.txt
   GRUB_CMDLINE_LINUX_DEFAULT="root=/dev/mapper/archlinux resume_offset=2761984"
 ```
 
-![/etc/default/grub截图](/images/uploads/pasted-image-20220512115505.png "/etc/default/grub截图")
+![/etc/default/grub截图](/images/uploads/pasted-image-20220512115505.png '/etc/default/grub截图')
 
 重新生成 `grub.cfg`
 
@@ -505,12 +506,11 @@ sudo nvim /etc/snapper/configs/home
 
 #### 设置允许访问的用户组
 
-![设置允许访问的用户组截图](/images/uploads/pasted-image-20220512135502.png "设置允许访问的用户组截图")
+![设置允许访问的用户组截图](/images/uploads/pasted-image-20220512135502.png '设置允许访问的用户组截图')
 
 #### 设置自动快照规则
 
-![设置自动快照规则截图](/images/uploads/pasted-image-20220512135738.png "设置自动快照规则截图")
-
+![设置自动快照规则截图](/images/uploads/pasted-image-20220512135738.png '设置自动快照规则截图')
 
 ### 启用自动快照和自动快照清理
 
@@ -529,20 +529,19 @@ sudo systemctl enable --now snapper-cleanup.timer
 yay -S snap-pac-grub
 ```
 
-
 ### 安装 snapper-gui 工具 (可选)
 
 ```
-yay -S snapper-gui 
+yay -S snapper-gui
 ```
 
 ## 参考
 
-1.  [Btrfs (简体中文) - ArchWiki](https://wiki.archlinux.org/title/Btrfs_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
-2. [Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file)
+1.  [Btrfs (简体中文) - ArchWiki](<https://wiki.archlinux.org/title/Btrfs_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)>)
+2.  [Power management/Suspend and hibernate - ArchWiki](https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file)
 3.  [从 Manjaro 迁移到 Arch Linux | weirane’s blog](https://blog.ruo-chen.wang/2021/03/switch-from-manjaro-to-arch.html)
 4.  [让系统更安全 - 系统分区加密 (Btrfs on LUKS) 操作实录 | ∩ω∩ Technology](https://nwn.moe/posts/btrfs-on-luks/)
 5.  [(3) Arch Linux Install: January 2021 ISO With BTRFS & Snapshots - YouTub](https://www.youtube.com/watch?v=Xynotc9BKe8)
 6.  [Deebble/arch-btrfs-install-guide: Arch Linux installation guide with btrfs and snapper](https://github.com/Deebble/arch-btrfs-install-guide)
-7. [arch btrfs with encryption](https://seankhliao.com/blog/12020-11-08-arch-dm-crypt-btrfs/)
-8. [swap - Can I have a swapfile on btrfs? - Ask Ubuntu](https://askubuntu.com/questions/1206157/can-i-have-a-swapfile-on-btrfs)
+7.  [arch btrfs with encryption](https://seankhliao.com/blog/12020-11-08-arch-dm-crypt-btrfs/)
+8.  [swap - Can I have a swapfile on btrfs? - Ask Ubuntu](https://askubuntu.com/questions/1206157/can-i-have-a-swapfile-on-btrfs)
