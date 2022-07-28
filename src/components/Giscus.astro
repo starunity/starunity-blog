@@ -18,7 +18,7 @@ const { dataLang } = Astro.props as Props
   data-emit-metadata="0"
   data-input-position="top"
   data-theme="transparent_dark"
-  data-lang={dataLang}
+  data-lang={dataLang === 'zh-Hans' ? 'zh-CN' : dataLang}
   data-loading="lazy"
   crossorigin="anonymous"
   async
