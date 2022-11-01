@@ -21,7 +21,6 @@
     "@astrojs/tailwind": "^2.1.1",
     "@tailwindcss/typography": "^0.5.7",
     "astro": "1.6.2",
-    "astro-imagetools": "^0.6.11",
     "astro-robots-txt": "^0.3.10",
     "daisyui": "^2.37.0",
     "date-fns": "^2.29.3"
