@@ -4,6 +4,7 @@ specifiers:
   '@astrojs/rss': ^1.0.3
   '@astrojs/sitemap': ^1.0.0
   '@astrojs/tailwind': ^2.1.1
+  '@astrolib/seo': ^0.2.1
   '@tailwindcss/typography': ^0.5.7
   astro: 1.6.2
   astro-compress: ^1.1.1
@@ -20,6 +21,7 @@ dependencies:
   '@astrojs/rss': 1.0.3
   '@astrojs/sitemap': 1.0.0
   '@astrojs/tailwind': 2.1.1
+  '@astrolib/seo': 0.2.1_astro@1.6.2
   '@tailwindcss/typography': 0.5.7
   astro: 1.6.2
   astro-compress: 1.1.1
@@ -165,6 +167,14 @@ packages:
     dependencies:
       global-agent: 3.0.0
       node-fetch: 3.2.10
+    dev: false
+
+  /@astrolib/seo/0.2.1_astro@1.6.2:
+    resolution: {integrity: sha512-VVN8AMja8RDA9mteHBHYLsf0dmu3qU50G9Shg1Yax7DHbOqpixAjl+teJFBoDg5SUWc/j5k0Ir6ivXIC2ExXlg==}
+    peerDependencies:
+      astro: ^1.2.1
+    dependencies:
+      astro: 1.6.2
     dev: false
 
   /@babel/code-frame/7.18.6:

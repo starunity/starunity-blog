@@ -14,7 +14,7 @@ const { title, lang } = Astro.props as Props
 const { name } = NAVIGATOR
 ---
 
-<BaseLayout title={title || name} lang={lang}>
+<BaseLayout lang={lang}>
   <div class="mx-auto max-w-xl lg:max-w-3xl">
     <Header />
     <main class="mb-4">

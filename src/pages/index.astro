@@ -1,6 +1,14 @@
 ---
+import { AstroSeo } from '@astrolib/seo'
+import { SITE } from '../config'
 import DefaultLayout from '../layouts/DefaultLayout.astro'
 ---
+
+<AstroSeo
+  defaultTitle={SITE.title}
+  titleTemplate={`${SITE.title} | %s`}
+  description={SITE.description}
+/>
 
 <DefaultLayout>
   <h1 class="text-4xl">Hello, I’m StarUnity</h1>
