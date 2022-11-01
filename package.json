@@ -15,7 +15,7 @@
     "**/*.astro": "prettier -w --plugin-search-dir=.",
     "**/*": "prettier -w --ignore-unknown"
   },
-  "devDependencies": {
+  "dependencies": {
     "@astrojs/rss": "^1.0.3",
     "@astrojs/sitemap": "^1.0.0",
     "@astrojs/tailwind": "^2.1.1",
@@ -24,7 +24,9 @@
     "astro-imagetools": "^0.6.11",
     "astro-robots-txt": "^0.3.10",
     "daisyui": "^2.37.0",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.29.3"
+  },
+  "devDependencies": {
     "git-cz": "^4.9.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
