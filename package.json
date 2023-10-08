@@ -16,6 +16,7 @@
     "**/*": "prettier -w --ignore-unknown"
   },
   "dependencies": {
+    "@astrojs/check": "^0.2.0",
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.1",
     "@astrojs/tailwind": "^5.0.1",
@@ -25,7 +26,8 @@
     "astro-compress": "^2.0.15",
     "astro-robots-txt": "^1.0.0",
     "daisyui": "^3.9.2",
-    "date-fns": "^2.30.0"
+    "date-fns": "^2.30.0",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "git-cz": "^4.9.0",
