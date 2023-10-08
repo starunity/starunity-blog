@@ -16,22 +16,22 @@
     "**/*": "prettier -w --ignore-unknown"
   },
   "dependencies": {
-    "@astrojs/rss": "^1.0.3",
-    "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/tailwind": "^2.1.1",
-    "@astrolib/seo": "^0.2.1",
-    "@tailwindcss/typography": "^0.5.7",
-    "astro": "1.6.2",
-    "astro-compress": "^1.1.1",
-    "astro-robots-txt": "^0.3.10",
-    "daisyui": "^2.37.0",
-    "date-fns": "^2.29.3"
+    "@astrojs/rss": "^3.0.0",
+    "@astrojs/sitemap": "^3.0.1",
+    "@astrojs/tailwind": "^5.0.1",
+    "@astrolib/seo": "^0.6.0",
+    "@tailwindcss/typography": "^0.5.10",
+    "astro": "3.2.3",
+    "astro-compress": "^2.0.15",
+    "astro-robots-txt": "^1.0.0",
+    "daisyui": "^3.9.2",
+    "date-fns": "^2.30.0"
   },
   "devDependencies": {
     "git-cz": "^4.9.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.7.0"
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "prettier-plugin-astro": "^0.12.0"
   }
 }
