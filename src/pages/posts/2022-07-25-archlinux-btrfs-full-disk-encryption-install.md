@@ -3,7 +3,7 @@ layout: ../../layouts/PostsLayout.astro
 title: ArchLinux Btrfs 磁盘加密安装
 lang: zh-Hans
 pubDate: 2022-07-25T11:45:16.013Z
-updatedDate: 2022-07-25T11:45:16.872Z
+updatedDate: 2023-12-06T03:50:50.719Z
 tags:
   - ArchLinux
   - Btrfs
@@ -266,7 +266,7 @@ arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc
 
-nvim /etc/local.gen # 取消注释 en_US.UTF-8 zh_CN.UTF-8 zh_TW.UTF-8
+nvim /etc/locale.gen # 取消注释 en_US.UTF-8 zh_CN.UTF-8 zh_TW.UTF-8
 locale-gen
 nvim /etc/locale.conf # 添加 LANG=en_US.UTF-8
 
