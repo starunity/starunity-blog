@@ -1,42 +1,37 @@
 ---
+import type { MarkdownLayoutProps } from 'astro'
 import { AstroSeo } from '@astrolib/seo'
 
 import showDate from '../utils/showDate'
 import DefaultLayout from './DefaultLayout.astro'
 import Giscus from '../components/Giscus.astro'
 
-interface Content {
+type Props = MarkdownLayoutProps<{
   title: string
   lang: 'en' | 'zh-Hans'
-  pubDate: string
-  updatedDate: string
-  tags: string[]
+  pubDate: Date
+  updatedDate: Date
+  tags: string[] | null
   description: string
-  astro: {
-    headers: { depth: number; slug: string; text: string }[]
-    source: string
-    html: string
-    url: string
-    file: string
-  }
-}
-const { content } = Astro.props as { content: Content }
+}>
+
+const { frontmatter } = Astro.props
 ---
 
-<AstroSeo title={content.title} description={content.description} />
+<AstroSeo title={frontmatter.title} description={frontmatter.description} />
 
-<DefaultLayout title={content.title} lang={content.lang}>
+<DefaultLayout title={frontmatter.title} lang={frontmatter.lang}>
   <article class="prose lg:prose-lg lg:max-w-3xl mx-auto mt-4">
-    <h1>{content.title}</h1>
+    <h1>{frontmatter.title}</h1>
     <div class="flex flex-wrap justify-between text-base">
       <i>
-        Updated on {showDate(content.pubDate)}
+        Updated on {showDate(frontmatter.pubDate)}
       </i>
       <i>
-        Published on {showDate(content.updatedDate)}
+        Published on {showDate(frontmatter.updatedDate)}
       </i>
     </div>
     <slot />
-    <Giscus dataLang={content.lang} />
+    <Giscus dataLang={frontmatter.lang} />
   </article>
 </DefaultLayout>

@@ -6,7 +6,7 @@
     "commit": "git-cz",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "format": "prettier -w --plugin-search-dir=. .",
     "prepare": "husky install"

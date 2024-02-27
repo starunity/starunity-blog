@@ -7,6 +7,7 @@ const { dataLang } = Astro.props as Props
 ---
 
 <script
+  is:inline
   src="https://giscus.app/client.js"
   data-repo="starunity/starunity-blog"
   data-repo-id="R_kgDOHpbgog"
@@ -21,7 +22,4 @@ const { dataLang } = Astro.props as Props
   data-lang={dataLang === 'zh-Hans' ? 'zh-CN' : dataLang}
   data-loading="lazy"
   crossorigin="anonymous"
-  async
->
-
-</script>
+  async></script>

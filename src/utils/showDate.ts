@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 
-function showDate(date: string): string {
+function showDate(date: Date): string {
   return format(new Date(date), 'PP')
 }
 
