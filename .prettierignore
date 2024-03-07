@@ -2,3 +2,4 @@ dist
 pnpm-lock.yaml
 .vscode
 .pnpm-store
+.astro
