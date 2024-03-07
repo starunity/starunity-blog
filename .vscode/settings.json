@@ -5,4 +5,15 @@
     "[astro]": {
         "editor.defaultFormatter": "astro-build.astro-vscode"
     },
+    "markdown.editor.filePaste.enabled": false,
+    "markdown.editor.drop.enabled": false,
+    "MarkdownPaste.path": "${workspaceRoot}/public/uploads/",
+    "MarkdownPaste.rules": [
+        {
+            "regex": "^\\.\\./\\.\\./\\.\\./public/uploads/(.*)",
+            "options": "g",
+            "replace": "![](/public/uploads/$1)"
+        }
+    ],
+    "MarkdownPaste.silence": true
 }

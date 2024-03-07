@@ -1,4 +1,8 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
+  "recommendations": [
+    "astro-build.astro-vscode",
+    "eliostruyf.vscode-front-matter",
+    "telesoho.vscode-markdown-paste-image"
+  ],
   "unwantedRecommendations": []
 }
