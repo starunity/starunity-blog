@@ -28,7 +28,7 @@ ip a
 iwctl station list
 ```
 
-![iwctl检查不到网卡](/images/uploads/pasted-image-20220510195833.png 'iwctl检查不到网卡')
+![iwctl检查不到网卡](/uploads/pasted-image-20220510195833.png 'iwctl检查不到网卡')
 
 如果没有找到可能是无线网卡被  `rfkill`  禁用了，通过以下命令解除禁用
 
@@ -111,7 +111,7 @@ cfdisk /dev/nvme0n1
 3. ~~8G SWAP 交换分区 (加密) （内存小于 8G 交换分区和内存同大小，大于 8G 交换分区大小固定 8G)~~
 4. 剩下加入 root 分区，通过 btrfs 卷来进行功能划分
 
-![分区截图](/images/uploads/rmnrsjz7sr.png '分区截图')
+![分区截图](/uploads/rmnrsjz7sr.png '分区截图')
 
 ### 格式化非加密分区
 
@@ -132,7 +132,7 @@ mkfs.ext4 /dev/nvme0n1p2
 cryptsetup benchmark
 ```
 
-![benchmark结果截图](/images/uploads/pasted-image-20220510212431.png 'benchmark结果截图')
+![benchmark结果截图](/uploads/pasted-image-20220510212431.png 'benchmark结果截图')
 
 综合加解密速度和安全性，我这里选择  `aes-xts`  密钥长度为 256b，因为  `cbc`  填充存在[填充攻击](https://www.packetmania.net/2020/12/01/AES-CBC-PaddingOracleAttack/)因此不建议选择
 
@@ -146,7 +146,7 @@ cryptsetup luksFormat -s 256 /dev/nvme0n1p4
 
 输入全大写  `YES`，然后输入加密密码并验证密码，等待一会儿就完成了磁盘加密
 
-![格式化分区截图](/images/uploads/pasted-image-20220510213907.png '格式化分区截图')
+![格式化分区截图](/uploads/pasted-image-20220510213907.png '格式化分区截图')
 
 #### 打开加密的分区
 
@@ -162,7 +162,7 @@ cryptsetup open /dev/nvme0n1p4 archlinux
 ls /dev/mapper/
 ```
 
-![查看磁盘映射文件截图](/images/uploads/pasted-image-20220510214404.png '查看磁盘映射文件截图')
+![查看磁盘映射文件截图](/uploads/pasted-image-20220510214404.png '查看磁盘映射文件截图')
 
 #### 查看加密分区
 
@@ -170,7 +170,7 @@ ls /dev/mapper/
 cryptsetup status /dev/mapper/archlinux
 ```
 
-![加密分区信息截图](/images/uploads/pasted-image-20220510214631.png '加密分区信息截图')
+![加密分区信息截图](/uploads/pasted-image-20220510214631.png '加密分区信息截图')
 
 ## 配置 Btrfs 文件系统
 
@@ -216,7 +216,7 @@ mount /dev/nvme0n1p2 /mnt/boot
 
 `lsblk`  查看挂载结果
 
-![lsblk挂载结果](/images/uploads/pasted-image-20220511163003.png 'lsblk挂载结果')
+![lsblk挂载结果](/uploads/pasted-image-20220511163003.png 'lsblk挂载结果')
 
 ### 对 /var/log/ 和 警用 CoW
 
@@ -343,7 +343,7 @@ nvim /etc/crypttab.initramfs
 :read !lsblk -o name,uuid
 ```
 
-![磁盘UUID截图](/images/uploads/pasted-image-20220511154203.png '磁盘UUID截图')
+![磁盘UUID截图](/uploads/pasted-image-20220511154203.png '磁盘UUID截图')
 
 然后填入以下内容并删除多余的内容
 
@@ -351,7 +351,7 @@ nvim /etc/crypttab.initramfs
 archlinux     UUID=<lsblk 显示的 root 分区磁盘的 UUID>    none
 ```
 
-![crypttab.initramfs文件截图](/images/uploads/pasted-image-20220511161121.png 'crypttab.initramfs文件截图')
+![crypttab.initramfs文件截图](/uploads/pasted-image-20220511161121.png 'crypttab.initramfs文件截图')
 
 #### 生成启动镜像
 
@@ -375,7 +375,7 @@ nvim /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="root=/dev/mapper/archlinux"
 ```
 
-![内核参数截图](/images/uploads/pasted-image-20220511155312.png '内核参数截图')
+![内核参数截图](/uploads/pasted-image-20220511155312.png '内核参数截图')
 
 #### 生成 GRUB 配置文件
 
@@ -396,7 +396,7 @@ passwd star
 EDITOR=nvim visudo
 ```
 
-![visudo编辑截图](/images/uploads/pasted-image-20220511155820.png 'visudo编辑截图')
+![visudo编辑截图](/uploads/pasted-image-20220511155820.png 'visudo编辑截图')
 
 更换新默认 `shell`
 
@@ -425,7 +425,7 @@ swapon /swap/swapfile
 /swap/swapfile         none         swap          sw          0 0
 ```
 
-![/etc/fstab截图](/images/uploads/pasted-image-20220511233702.png '/etc/fstab截图')
+![/etc/fstab截图](/uploads/pasted-image-20220511233702.png '/etc/fstab截图')
 
 使用 btrfs_map_physical 获取 btrfs swapfile 的偏移量
 
@@ -459,7 +459,7 @@ echo $offset > offset.txt
   GRUB_CMDLINE_LINUX_DEFAULT="root=/dev/mapper/archlinux resume_offset=2761984"
 ```
 
-![/etc/default/grub截图](/images/uploads/pasted-image-20220512115505.png '/etc/default/grub截图')
+![/etc/default/grub截图](/uploads/pasted-image-20220512115505.png '/etc/default/grub截图')
 
 重新生成 `grub.cfg`
 
@@ -506,11 +506,11 @@ sudo nvim /etc/snapper/configs/home
 
 #### 设置允许访问的用户组
 
-![设置允许访问的用户组截图](/images/uploads/pasted-image-20220512135502.png '设置允许访问的用户组截图')
+![设置允许访问的用户组截图](/uploads/pasted-image-20220512135502.png '设置允许访问的用户组截图')
 
 #### 设置自动快照规则
 
-![设置自动快照规则截图](/images/uploads/pasted-image-20220512135738.png '设置自动快照规则截图')
+![设置自动快照规则截图](/uploads/pasted-image-20220512135738.png '设置自动快照规则截图')
 
 ### 启用自动快照和自动快照清理
 
