@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/PostsLayout.astro
 title: 解决 AMD 显卡驱动控制面板无法打开
 lang: zh-Hans
 pubDate: 2022-07-24T15:19:20.663Z

@@ -1,18 +1,23 @@
 ---
 import HeadCommon from '../components/HeadCommon.astro'
+import Seo from '../components/Seo.astro'
 import { SITE } from '../config'
+import '../styles/global.css'
 
 export interface Props {
+  title?: string
+  description?: string
   lang?: string
 }
 
-const { lang } = Astro.props as Props
+const { title, description, lang } = Astro.props as Props
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang || SITE.defaultLanguage} data-theme="night">
   <head>
     <HeadCommon />
+    <Seo title={title} description={description} />
   </head>
   <body>
     <slot />

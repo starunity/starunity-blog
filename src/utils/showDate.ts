@@ -1,7 +1,9 @@
-import { format } from 'date-fns'
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  dateStyle: 'medium',
+})
 
 function showDate(date: Date): string {
-  return format(new Date(date), 'PP')
+  return dateFormatter.format(new Date(date))
 }
 
 export default showDate

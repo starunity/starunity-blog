@@ -1,5 +1,4 @@
 ---
-layout: ../../layouts/PostsLayout.astro
 title: ArchLinux Btrfs 磁盘加密安装
 lang: zh-Hans
 pubDate: 2022-07-25T11:45:16.013Z

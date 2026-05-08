@@ -1,34 +1,33 @@
 ---
-import type { MarkdownLayoutProps } from 'astro'
-import { AstroSeo } from '@astrolib/seo'
-
 import showDate from '../utils/showDate'
 import DefaultLayout from './DefaultLayout.astro'
 import Giscus from '../components/Giscus.astro'
 
-type Props = MarkdownLayoutProps<{
+interface PostFrontmatter {
   title: string
   lang: 'en' | 'zh-Hans'
   pubDate: Date
   updatedDate: Date
-  tags: string[] | null
+  tags?: string[] | null
   description: string
-}>
+}
 
-const { frontmatter } = Astro.props
+const { frontmatter } = Astro.props as { frontmatter: PostFrontmatter }
 ---
 
-<AstroSeo title={frontmatter.title} description={frontmatter.description} />
-
-<DefaultLayout title={frontmatter.title} lang={frontmatter.lang}>
+<DefaultLayout
+  title={frontmatter.title}
+  description={frontmatter.description}
+  lang={frontmatter.lang}
+>
   <article class="prose lg:prose-lg lg:max-w-3xl mx-auto mt-4">
     <h1>{frontmatter.title}</h1>
     <div class="flex flex-wrap justify-between text-base">
       <i>
-        Updated on {showDate(frontmatter.pubDate)}
+        Updated on {showDate(frontmatter.updatedDate)}
       </i>
       <i>
-        Published on {showDate(frontmatter.updatedDate)}
+        Published on {showDate(frontmatter.pubDate)}
       </i>
     </div>
     <slot />

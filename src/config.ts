@@ -8,6 +8,7 @@ export interface ILinkList {
 }
 
 export const SITE = {
+  url: 'https://blog.starunity.dev',
   title: "StarUnity's Blog",
   description: "StarUnity's Blog",
   defaultLanguage: 'en',

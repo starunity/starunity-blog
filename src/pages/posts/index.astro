@@ -1,6 +1,5 @@
 ---
 import { getCollection } from 'astro:content'
-import { AstroSeo } from '@astrolib/seo'
 import showDate from '../../utils/showDate'
 import DefaultLayout from '../../layouts/DefaultLayout.astro'
 
@@ -8,9 +7,7 @@ const allPosts = await getCollection('posts')
 allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 ---
 
-<AstroSeo title="文章 Posts" description="文章列表" />
-
-<DefaultLayout title="Posts">
+<DefaultLayout title="文章 Posts" description="文章列表">
   <ul class="text-2xl">
     {
       allPosts.map(post => {
@@ -19,7 +16,7 @@ allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
           <li>
             {pubDate} -{' '}
             <a
-              href={`/posts/${post.slug}/`}
+              href={`/posts/${post.id.replace(/\.md$/, '')}/`}
               class="link link-primary link-hover"
             >
               {post.data.title}

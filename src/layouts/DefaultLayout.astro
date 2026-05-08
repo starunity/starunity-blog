@@ -5,13 +5,14 @@ import Footer from '../components/Footer.astro'
 
 export interface Props {
   title?: string
+  description?: string
   lang?: string
 }
 
-const { lang } = Astro.props as Props
+const { title, description, lang } = Astro.props as Props
 ---
 
-<BaseLayout lang={lang}>
+<BaseLayout title={title} description={description} lang={lang}>
   <div class="mx-auto max-w-xl lg:max-w-3xl">
     <Header />
     <main class="mb-4">
